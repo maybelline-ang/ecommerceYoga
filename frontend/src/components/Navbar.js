@@ -5,7 +5,7 @@ import { Badge } from "@material-ui/core";
 
 const Container = styled.div`
   height: 100px;
-  background-color: orange;
+  // background-color: orange;
 `;
 
 const Wrapper = styled.div`
