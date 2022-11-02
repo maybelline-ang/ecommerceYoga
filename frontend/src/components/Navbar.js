@@ -40,6 +40,9 @@ const Language = styled.span`
 const Centre = styled.div`
   flex: 3;
   text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 3px;
 `;
 
 const Logo = styled.h1`
