@@ -2,6 +2,8 @@ import React from "react";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
 import Slider from "../components/Slider";
+import Categories from "../components/Categories";
+import ProductItems from "../components/ProductItems";
 
 const Homepage = () => {
   return (
@@ -9,6 +11,8 @@ const Homepage = () => {
       <Announcement />
       <Navbar />
       <Slider />
+      <Categories />
+      <ProductItems />
     </div>
   );
 };

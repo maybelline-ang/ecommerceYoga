@@ -2,6 +2,7 @@ import { ArrowLeftRounded, ArrowRightRounded } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
+import { sliderData } from "../data/sliderData";
 
 const Container = styled.div`
   width: 100%;
@@ -34,7 +35,8 @@ const Arrow = styled.div`
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
-  transform: translateX(-200vw);
+  transition: 1s ease;
+  transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
 const Slide = styled.div`
@@ -78,52 +80,32 @@ const Button = styled.button`
 
 const Slider = () => {
   const [slideIndex, setSlideIndex] = useState(0);
-  const handleClick = (direction) => {};
+  const handleClick = (direction) => {
+    if (direction === "left") {
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+    } else {
+      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+    }
+  };
   return (
     <div>
       <Container>
         <Arrow direction="left" onClick={() => handleClick("left")}>
           <ArrowLeftRounded />
         </Arrow>
-        <Wrapper>
-          <Slide>
-            <ImageContainer>
-              <Image src="https://cdn.shopify.com/s/files/1/0945/8898/files/AUG2022_WomensSWEAT_Edited39_1000x.jpg?v=1666149808" />
-            </ImageContainer>
-            <DetailsContainer>
-              <Title>HELLO YOGA Super Sale 2022</Title>
-              <Description>
-                SALE IS NOW ON.
-                <br></br>GET THEM BEFORE SALE ENDS ON 11/11
-              </Description>
-              <Button>SHOP NOW</Button>
-            </DetailsContainer>
-          </Slide>
-          <Slide>
-            <ImageContainer>
-              <Image src="https://cdn.shopify.com/s/files/1/0945/8898/files/Shoes21-edit_4_2000x.jpg?v=1614156922" />
-            </ImageContainer>
-            <DetailsContainer>
-              <Title>NEW ARRIVALS</Title>
-              <Description>
-                SHOP THE LATEST TRENDIEST LOOKS
-                <h6>*LAUNCHING 18 NOV AT 12PM</h6>
-              </Description>
-              <Button>SHOP NOW</Button>
-            </DetailsContainer>
-          </Slide>
-          <Slide>
-            <ImageContainer>
-              <Image src="https://cdn.shopify.com/s/files/1/0945/8898/files/KYDRA-SWEATINSTYLE-4944-Edit_1400x.jpg?v=1645094923" />
-            </ImageContainer>
-            <DetailsContainer>
-              <Title>SUSTAINABLE & ETHICALLY MADE</Title>
-              <Description>
-                TIMELESS, ECO-FRIENDLY, AND VERSATILE YOGA WEAR
-              </Description>
-              <Button>SHOP NOW</Button>
-            </DetailsContainer>
-          </Slide>
+        <Wrapper slideIndex={slideIndex}>
+          {sliderData.map((item) => (
+            <Slide key={item.id}>
+              <ImageContainer>
+                <Image src={item.img} />
+              </ImageContainer>
+              <DetailsContainer>
+                <Title>{item.title}</Title>
+                <Description>{item.description}</Description>
+                <Button>SHOP NOW</Button>
+              </DetailsContainer>
+            </Slide>
+          ))}
         </Wrapper>
         <Arrow direction="right" onClick={() => handleClick("right")}>
           <ArrowRightRounded />
