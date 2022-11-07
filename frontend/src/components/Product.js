@@ -25,25 +25,15 @@ const Info = styled.div`
 const Container = styled.div`
   flex: 1;
   margin: 5px;
-  min-width: 280px;
-  height: 350px;
+  min-width: 320px;
+  height: 450px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5fbfd;
   position: relative;
   &:hover ${Info} {
     opacity: 1;
   }
-`;
-
-// show image on top of a circle for aesthetic purpose
-const Circle = styled.div`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-color: white;
-  position: absolute;
 `;
 
 const Image = styled.img`
@@ -71,7 +61,6 @@ const Product = ({ item }) => {
   return (
     <div>
       <Container>
-        <Circle />
         <Image src={item.img} />
         <Info>
           <Icon>

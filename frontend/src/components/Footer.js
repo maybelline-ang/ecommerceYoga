@@ -10,22 +10,23 @@ import styled from "styled-components";
 
 const Container = styled.div`
   background-color: #2c041c;
+  color: white;
+  display: flex;
 `;
 const Left = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
   padding: 20px;
-  color: white;
 `;
 
-const Logo = styled.h3`
-  letter-spacing: 3px;
-`;
+//nothing to style
+const Logo = styled.h3``;
+
 const Description = styled.p`
   margin: 20px 0px;
 `;
-const SocialMediaIcons = styled.h1`
+const SocialMediaIcons = styled.h6`
   display: flex;
   color: black;
   color: white;
@@ -43,8 +44,23 @@ const Centre = styled.div`
   padding: 20px;
 `;
 
+const Title = styled.h3`
+  margin-bottom: 30px;
+`;
+
+// list auto generates margin & padding therefore setting them to zero
+const List = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+`;
+
+//nothing to style in list items
+const ListItems = styled.li``;
+
 const Right = styled.div`
   flex: 1;
+  padding: 20px;
 `;
 
 // const TikTokIcon = ({ color = "#000000" }) => {
@@ -66,8 +82,32 @@ const Footer = () => {
     <div>
       <Container>
         <Left>
-          <LocationOnOutlined />
-          <Logo>Find us at</Logo>
+          <Title> CUSTOMER SERVICE </Title>
+          <List>
+            <ListItems>Track My Order</ListItems>
+            <ListItems>FAQs</ListItems>
+            <ListItems>Shipping Info</ListItems>
+            <ListItems>Return Policy</ListItems>
+            <ListItems>Size Guide</ListItems>
+            <ListItems>Reviews</ListItems>
+            <ListItems>Contact Us</ListItems>
+          </List>
+        </Left>
+        <Centre>
+          <Title>ABOUT US</Title>
+          <List>
+            <ListItems>About Us</ListItems>
+            <ListItems>Press & Media</ListItems>
+            <ListItems>Privacy Policy</ListItems>
+            <ListItems>Terms of Service</ListItems>
+            <ListItems>Careers</ListItems>
+          </List>
+        </Centre>
+        <Right>
+          <Logo>
+            <LocationOnOutlined style={{ marginRight: "5px" }} />
+            VISIT OUR STORE
+          </Logo>
           <Description>
             79 Anson Road <br />
             #20-01 <br />
@@ -87,9 +127,7 @@ const Footer = () => {
               <YouTube />
             </SocialIcon>
           </SocialMediaIcons>
-        </Left>
-        <Centre></Centre>
-        <Right></Right>
+        </Right>
       </Container>
     </div>
   );
