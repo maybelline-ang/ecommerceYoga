@@ -51,9 +51,9 @@ const Button = styled.button`
 const RegisterPage = () => {
   return (
     <div>
-      <Navbar />
-      <Header />
       <Container>
+        <Navbar />
+        <Header />
         <Wrapper>
           <Title>Create Account</Title>
           <Form>
@@ -70,8 +70,8 @@ const RegisterPage = () => {
             <Button>Create</Button>
           </Form>
         </Wrapper>
+        <Footer />
       </Container>
-      <Footer />
     </div>
   );
 };

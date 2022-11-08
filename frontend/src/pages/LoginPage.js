@@ -54,9 +54,9 @@ const Link = styled.a`
 const LoginPage = () => {
   return (
     <div>
-      <Navbar />
-      <Header />
       <Container>
+        <Navbar />
+        <Header />
         <Wrapper>
           <Title>Sign In</Title>
           <Form>
@@ -67,8 +67,8 @@ const LoginPage = () => {
             <Link>Create an Account</Link>
           </Form>
         </Wrapper>
+        <Footer />
       </Container>
-      <Footer />
     </div>
   );
 };
