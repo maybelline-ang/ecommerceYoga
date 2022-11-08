@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
-import Announcement from "../components/Announcement";
+import Header from "../components/Header";
 import ProductItems from "../components/ProductItems";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
@@ -37,7 +37,7 @@ const ProductPage = () => {
     <div>
       <Container>
         <Navbar />
-        <Announcement />
+        <Header />
         <Title>Tops</Title>
         <FilterContainer>
           <Filter>

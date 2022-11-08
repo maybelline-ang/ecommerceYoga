@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
-import Announcement from "../components/Announcement";
+import Header from "../components/Header";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { Add, Remove } from "@material-ui/icons";
@@ -122,7 +122,7 @@ const SingleProductPage = () => {
     <div>
       <Container>
         <Navbar />
-        <Announcement />
+        <Header />
         <Wrapper>
           <ImageContainer>
             <Image src="https://cdn.shopify.com/s/files/1/0945/8898/products/SavannahTank_Rouge_003_1000x.jpg?v=1647570959"></Image>

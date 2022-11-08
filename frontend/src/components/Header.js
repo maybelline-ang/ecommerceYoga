@@ -11,7 +11,7 @@ const Container = styled.div`
   font-size: 14px;
 `;
 
-const Announcement = () => {
+const Header = () => {
   return (
     <div>
       <Container>New Here? Enjoy 10% off no min. spend. Sign up now</Container>
@@ -19,4 +19,4 @@ const Announcement = () => {
   );
 };
 
-export default Announcement;
+export default Header;
