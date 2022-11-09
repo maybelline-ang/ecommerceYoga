@@ -13,6 +13,7 @@ const Container = styled.div`
   color: white;
   display: flex;
 `;
+
 const Left = styled.div`
   flex: 1;
   display: flex;

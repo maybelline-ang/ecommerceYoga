@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import { Badge } from "@material-ui/core";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   height: 100px;
-  // background-color: orange;
 `;
 
 const Wrapper = styled.div`

@@ -101,6 +101,31 @@ const Hr = styled.hr`
 
 const Summary = styled.div`
   flex: 1;
+  border: 0.5px solid lightgray;
+  border-radius: 10px;
+  padding: 20px;
+  height: 50vh;
+`;
+
+const SummaryTitle = styled.h1`
+  font-weight: 200;
+`;
+
+const SummaryItem = styled.div`
+  margin: 30px 0px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: ${(props) => props.type === "total" && "500"};
+  font-size: ${(props) => props.type === "total" && "500"};
+`;
+const SummaryItemText = styled.span``;
+const SummaryItemPrice = styled.span``;
+const SummaryButton = styled.button`
+  width: 100%;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  font-weight: 600;
 `;
 
 const Cart = () => {
@@ -124,7 +149,7 @@ const Cart = () => {
                   <Image src="https://cdn.shopify.com/s/files/1/0945/8898/products/SavannahTank_Rouge_003_1000x.jpg?v=1647570959"></Image>
                   <Details>
                     <ProductName>
-                      <b>Product:</b>Back Cut Tank - Rouge
+                      <b>Product:</b> Back Cut Tank - Rouge
                     </ProductName>
                     <ProductId>
                       <b>ID: </b>12938294
@@ -146,10 +171,24 @@ const Cart = () => {
                 </PriceDetail>
               </Product>
             </Info>
-            <Summary>Summary</Summary>
+            <Summary>
+              <SummaryTitle>Order Summary</SummaryTitle>
+              <SummaryItem>
+                <SummaryItemText>Subtotal</SummaryItemText>
+                <SummaryItemPrice>SGD 56</SummaryItemPrice>
+              </SummaryItem>
+              <SummaryItem>
+                <SummaryItemText>Estimated Shipping</SummaryItemText>
+                <SummaryItemPrice>SGD 10</SummaryItemPrice>
+              </SummaryItem>
+              <SummaryItem type="total">
+                <SummaryItemText>Total</SummaryItemText>
+                <SummaryItemPrice>SGD 66</SummaryItemPrice>
+              </SummaryItem>
+              <SummaryButton>Check Out Now</SummaryButton>
+            </Summary>
           </Bottom>
         </Wrapper>
-
         <Footer />
       </Container>
     </div>
