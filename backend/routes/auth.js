@@ -3,9 +3,9 @@ const User = require("../models/User");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 
-///////////////////////////////////////////////////////
-///////////////// User Registration ///////////////////
-///////////////////////////////////////////////////////
+//////////////////////////////////////////////////
+// Register User
+//////////////////////////////////////////////////
 
 //* using async because of time taken to register
 router.post("/register", async (req, res) => {
@@ -32,7 +32,7 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
-    !user && res.status(401).json("no users found");
+    !user && res.status(401).json("no user found");
 
     const hash = CryptoJS.AES.decrypt(
       user.password,

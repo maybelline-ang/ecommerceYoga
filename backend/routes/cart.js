@@ -65,7 +65,7 @@ router.get("/find/:userId", verifyTokenAuthorization, async (req, res) => {
 });
 
 /////////////////////////////////////////////////
-//GET ALL
+//ADMIN GET ALL CARTS
 ////////////////////////////////////////////////
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {

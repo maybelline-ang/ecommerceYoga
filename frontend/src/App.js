@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import ProductPage from "./pages/ProductPage";
 import SingleProductPage from "./pages/SingleProductPage";
@@ -8,27 +13,30 @@ import LoginPage from "./pages/LoginPage";
 import Cart from "./pages/Cart";
 
 function App() {
+  const user = true;
   return (
     <div>
       <Router>
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-        </Routes>
-        <Routes>
-          <Route path="/products/:category" element={<ProductPage />} />
-        </Routes>
-        <Routes>
-          <Route path="/product/:id" element={<SingleProductPage />} />
-        </Routes>
-        <Routes>
-          <Route exact path="/register" element={<RegisterPage />} />
-        </Routes>
-        <Routes>
-          <Route exact path="/login" element={<LoginPage />} />
-        </Routes>
-        <Routes>
-          <Route exact path="/cart" element={<Cart />} />
-        </Routes>
+        <Switch>
+          <Route exact path="/">
+            <Homepage />
+          </Route>
+          <Route path="/products/:category">
+            <ProductPage />
+          </Route>
+          <Route path="/product/:id">
+            <SingleProductPage />
+          </Route>
+          <Route path="/cart">
+            <Cart />
+          </Route>
+          <Route path="/login">
+            {user ? <Redirect to="/" /> : <LoginPage />}
+          </Route>
+          <Route path="/register">
+            {user ? <Redirect to="/" /> : <RegisterPage />}
+          </Route>
+        </Switch>
       </Router>
     </div>
   );

@@ -7,7 +7,7 @@ const {
 } = require("./verifyToken");
 
 //////////////////////////////////////////////
-//CREATE
+// CREATE
 /////////////////////////////////////////////
 router.post("/", verifyToken, async (req, res) => {
   const newOrder = new Order(req.body);
@@ -21,7 +21,7 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 ///////////////////////////////////////////
-//UPDATE
+// UPDATE
 ///////////////////////////////////////////
 router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
@@ -39,7 +39,7 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 /////////////////////////////////////////////////
-//DELETE
+// DELETE
 /////////////////////////////////////////////////
 
 router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
@@ -52,7 +52,7 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 ///////////////////////////////////////////////
-//GET ORDERS
+// GET ORDERS
 ///////////////////////////////////////////////
 router.get("/find/:userId", verifyTokenAuthorization, async (req, res) => {
   try {
@@ -65,7 +65,7 @@ router.get("/find/:userId", verifyTokenAuthorization, async (req, res) => {
 });
 
 /////////////////////////////////////////////////
-//GET ALL ORDERS
+// GET ALL ORDERS
 ////////////////////////////////////////////////
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
@@ -77,11 +77,11 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
 });
 
 /////////////////////////////////////////////////
-//GET MONTHLY INCOME
+// GET MONTHLY INCOME
 ////////////////////////////////////////////////
 router.get("/income", verifyTokenAndAdmin, async (req, res) => {
   const date = new Date();
-  const lastMonth = new Date(date.setMonth(dates.getMonth() - 1));
+  const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
   // month before last month
   const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
 
