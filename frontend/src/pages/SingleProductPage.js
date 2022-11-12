@@ -5,6 +5,10 @@ import Header from "../components/Header";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { Add, Remove } from "@material-ui/icons";
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import { publicRequest } from "../requestMethods";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -118,6 +122,34 @@ const Right = styled.div`
 `;
 
 const SingleProductPage = () => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const response = await publicRequest.get("/products/find/" + id);
+        setProduct(response.data);
+      } catch {}
+      getProduct();
+    };
+  }, [id]);
+
+  const handleQuantity = (type) => {
+    if (type === "decrease") {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const handleClick = () => {
+    //to update cart
+  };
   return (
     <div>
       <Container>
@@ -125,36 +157,34 @@ const SingleProductPage = () => {
         <Header />
         <Wrapper>
           <ImageContainer>
-            <Image src="https://cdn.shopify.com/s/files/1/0945/8898/products/SavannahTank_Rouge_003_1000x.jpg?v=1647570959"></Image>
+            <Image src={product.img}></Image>
           </ImageContainer>
           <InfoContainer>
-            <Title>Back Cut Tank - Rouge </Title>
-            <Price>SGD 58</Price>
+            <Title>{product.title} </Title>
+            <Price>SGD {product.price}</Price>
             <FilterContainer>
               <Filter>
                 <FilterTitle>Color</FilterTitle>
-                <FilterColour color="black"></FilterColour>
-                <FilterColour color="red"></FilterColour>
-                <FilterColour color="beige"></FilterColour>
+                {product.color?.map((i) => (
+                  <FilterColour color={i} key={i} onClick={() => setColor(i)} />
+                ))}
               </Filter>
               <Filter>
                 <FilterTitle>Size</FilterTitle>
-                <FilterSize>
-                  <FilterSizeOption>XS</FilterSizeOption>
-                  <FilterSizeOption>S</FilterSizeOption>
-                  <FilterSizeOption>M</FilterSizeOption>
-                  <FilterSizeOption>L</FilterSizeOption>
-                  <FilterSizeOption>XL</FilterSizeOption>
+                <FilterSize onChange={(e) => setSize(e.target.value)}>
+                  {product.size?.map((i) => (
+                    <FilterSizeOption key={i}> {i}</FilterSizeOption>
+                  ))}
                 </FilterSize>
               </Filter>
             </FilterContainer>
             <AddContainer>
               <QuantityContainer>
-                <Remove />
-                <Quantity>1</Quantity>
-                <Add />
+                <Remove onClick={() => handleQuantity("decrease")} />
+                <Quantity>{quantity}</Quantity>
+                <Add onClick={() => handleQuantity("increase")} />
               </QuantityContainer>
-              <Button> Add to Cart</Button>
+              <Button onClick={handleClick}> Add to Cart</Button>
             </AddContainer>
           </InfoContainer>
         </Wrapper>
@@ -162,13 +192,7 @@ const SingleProductPage = () => {
           <Left>
             <Description>
               <Title>Description</Title>
-              <p>
-                We are in love with our latest sports bra arrival and can't keep
-                our eyes off. Constructed from organic cotton, this sports bra
-                has a high neckline and offers extra coverage, ideal for yoga,
-                pilates and other workouts.The eye catching cross back detail
-                offers extra support.
-              </p>
+              <p>{product.description}</p>
               <p>Key Features:</p>
               <li> Extra coverage at front </li>
               <li> Eye catching cross back detail</li>

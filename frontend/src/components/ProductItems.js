@@ -24,7 +24,7 @@ const ProductItems = ({ category, filters, sort }) => {
             ? `http://localhost:5001/api/products?category=${category}`
             : "http://localhost:5001/api/products"
         );
-        console.log(response);
+        // console.log(response);
         setProducts(response.data);
       } catch (err) {}
     };
@@ -57,6 +57,8 @@ const ProductItems = ({ category, filters, sort }) => {
       );
     }
   }, [sort]);
+
+  // console.log(filteredProducts);
 
   return (
     <div>

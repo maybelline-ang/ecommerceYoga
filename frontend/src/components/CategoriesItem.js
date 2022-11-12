@@ -41,7 +41,7 @@ const CategoriesItem = ({ item }) => {
   return (
     <div>
       <Container>
-        <Link to={`/products/${item.category}`}>
+        <Link to={`/products/${item.category.toLowerCase()}`}>
           <Image src={item.img} />
           <Info>
             <Title>{item.title}</Title>

@@ -37,13 +37,13 @@ const Option = styled.option``;
 const ProductPage = () => {
   const location = useLocation();
   const category = location.pathname.split("/")[2];
-  const [filter, setFilters] = useState({});
+  const [filters, setFilters] = useState({});
   const [sort, setSort] = useState("bestseller");
 
   const handleFilters = (e) => {
     const value = e.target.value;
     setFilters({
-      ...filter,
+      ...filters,
       [e.target.name]: value.toLowerCase(),
     });
   };
@@ -58,12 +58,15 @@ const ProductPage = () => {
           <Filter>
             <FilterText>FILTER PRODUCTS</FilterText>
             <Select name="color" onChange={handleFilters}>
-              <Option disabled>Colour</Option>
-              <Option>black</Option>
-              <Option>red</Option>
-              <Option>white</Option>
-              <Option>green</Option>
-              <Option>yellow</Option>
+              <Option disabled> Colour </Option>
+              <Option>Black</Option>
+              <Option>Pink</Option>
+              <Option>Blue</Option>
+              <Option>Red</Option>
+              <Option>Yellow</Option>
+              <Option>Gray</Option>
+              <Option>Purple</Option>
+              <Option>White</Option>
             </Select>
             <Filter />
             <Select name="size" onChange={handleFilters}>
@@ -85,7 +88,7 @@ const ProductPage = () => {
             </Select>
           </Filter>
         </FilterContainer>
-        <ProductItems category={category} filters={filter} sort={sort} />
+        <ProductItems category={category} filters={filters} sort={sort} />
         <Newsletter />
         <Footer />
       </Container>
