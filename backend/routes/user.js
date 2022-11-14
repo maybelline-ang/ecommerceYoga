@@ -2,7 +2,6 @@ const User = require("../models/User");
 const {
   verifyTokenAuthorization,
   verifyTokenAndAdmin,
-  verifyToken,
 } = require("./verifyToken");
 const CryptoJS = require("crypto-js");
 

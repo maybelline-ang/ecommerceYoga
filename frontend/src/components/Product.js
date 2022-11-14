@@ -62,7 +62,7 @@ const Product = ({ item }) => {
   return (
     <div>
       <Container>
-        <Image src={item.img} />
+        <Image src={item.image} />
         <Info>
           <Icon>
             <ShoppingCartOutlined />

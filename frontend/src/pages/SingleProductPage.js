@@ -36,16 +36,16 @@ const Price = styled.h3`
   font-size: 20px;
 `;
 
-const Filter = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 const FilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 50%;
   margin: 30px 0px;
+`;
+
+const Filter = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const FilterTitle = styled.span`
