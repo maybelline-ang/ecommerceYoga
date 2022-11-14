@@ -11,6 +11,7 @@ import SingleProductPage from "./pages/SingleProductPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import Cart from "./pages/Cart";
+import Success from "./pages/Success";
 
 function App() {
   const user = true;
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path="/cart">
             <Cart />
+          </Route>
+          <Route path="/success">
+            <Success />
           </Route>
           <Route path="/login">
             {user ? <Redirect to="/" /> : <LoginPage />}

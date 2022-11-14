@@ -9,6 +9,8 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { publicRequest } from "../requestMethods";
+import { addProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -128,6 +130,7 @@ const SingleProductPage = () => {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -147,9 +150,11 @@ const SingleProductPage = () => {
     }
   };
 
+  //to update cart via Redux
   const handleClick = () => {
-    //to update cart
+    dispatch(addProduct({ ...product, quantity, color, size }));
   };
+
   return (
     <div>
       <Container>
@@ -157,7 +162,7 @@ const SingleProductPage = () => {
         <Header />
         <Wrapper>
           <ImageContainer>
-            <Image src={product.img}></Image>
+            <Image src={product.image}></Image>
           </ImageContainer>
           <InfoContainer>
             <Title>{product.title} </Title>

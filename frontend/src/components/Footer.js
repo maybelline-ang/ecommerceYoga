@@ -32,7 +32,7 @@ const SocialMediaIcons = styled.h6`
   color: black;
   color: white;
 `;
-const SocialIcon = styled.h1`
+const SocialIcon = styled.h6`
   width: 45px;
   height: 45px;
   justify-content: center;
