@@ -8,7 +8,7 @@ export const productSlice = createSlice({
     error: false,
   },
   reducers: {
-    // GET ALL PRODUCTS
+    ////////////// GET ALL PRODUCTS /////////////////////////
     getProductInitial: (state) => {
       state.isFetching = true;
       state.error = false;
@@ -26,7 +26,7 @@ export const productSlice = createSlice({
       state.error = true;
     },
 
-    // DELETE PRODUCTS
+    //////////// DELETE PRODUCTS ///////////////////////////
     deleteProductInitial: (state) => {
       state.isFetching = true;
       state.error = false;
@@ -45,6 +45,42 @@ export const productSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+
+    ///////////////////// UPDATE PRODUCTS ///////////////////////////////
+    updateProductInitial: (state) => {
+      state.isFetching = true;
+      state.error = false;
+    },
+
+    // * if fetching is successful, fetching is completed henceforth set to "false"
+    updateProductSuccess: (state, action) => {
+      state.isFetching = false;
+      state.products[
+        state.products.findIndex((item) => item._id === action.payload.id)
+      ] = action.payload.product;
+    },
+
+    updateProductFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
+
+    //////////////// CREATE PRODUCTS //////////////////////////
+    createProductInitial: (state) => {
+      state.isFetching = true;
+      state.error = false;
+    },
+
+    // * if fetching is successful, fetching is completed henceforth set to "false"
+    createProductSuccess: (state, action) => {
+      state.isFetching = false;
+      state.products.push(action.payload);
+    },
+
+    createProductFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
   },
 });
 
@@ -55,6 +91,12 @@ export const {
   deleteProductInitial,
   deleteProductSuccess,
   deleteProductFailure,
+  updateProductInitial,
+  updateProductSuccess,
+  updateProductFailure,
+  createProductInitial,
+  createProductSuccess,
+  createProductFailure,
 } = productSlice.actions;
 
 export default productSlice.reducer;

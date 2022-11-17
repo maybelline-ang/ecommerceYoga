@@ -135,107 +135,65 @@ const SingleProductPage = () => {
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const response = await publicRequest.get("/products/find/" + id);
-        setProduct(response.data);
+        const res = await publicRequest.get("/products/find/" + id);
+        setProduct(res.data);
       } catch {}
-      getProduct();
     };
+    getProduct();
   }, [id]);
 
   const handleQuantity = (type) => {
-    if (type === "decrease") {
+    if (type === "dec") {
       quantity > 1 && setQuantity(quantity - 1);
     } else {
       setQuantity(quantity + 1);
     }
   };
 
-  //to update cart via Redux
   const handleClick = () => {
     dispatch(addProduct({ ...product, quantity, color, size }));
   };
-
   return (
-    <div>
-      <Container>
-        <Navbar />
-        <Header />
-        <Wrapper>
-          <ImageContainer>
-            <Image src={product.image}></Image>
-          </ImageContainer>
-          <InfoContainer>
-            <Title>{product.title} </Title>
-            <Price>SGD {product.price}</Price>
-            <FilterContainer>
-              <Filter>
-                <FilterTitle>Color</FilterTitle>
-                {product.color?.map((i) => (
-                  <FilterColour color={i} key={i} onClick={() => setColor(i)} />
+    <Container>
+      <Navbar />
+      <Header />
+      <Wrapper>
+        <ImageContainer>
+          <Image src={product.image} />
+        </ImageContainer>
+        <InfoContainer>
+          <Title>{product.title}</Title>
+          <Description>{product.description}</Description>
+          <Price>$ {product.price}</Price>
+          <FilterContainer>
+            <Filter>
+              <FilterTitle>Color</FilterTitle>
+              {product.color?.map((c) => (
+                <FilterColour color={c} key={c} onClick={() => setColor(c)} />
+              ))}
+            </Filter>
+            <Filter>
+              <FilterTitle>Size</FilterTitle>
+              <FilterSize onChange={(e) => setSize(e.target.value)}>
+                {product.size?.map((s) => (
+                  <FilterSizeOption key={s}>{s}</FilterSizeOption>
                 ))}
-              </Filter>
-              <Filter>
-                <FilterTitle>Size</FilterTitle>
-                <FilterSize onChange={(e) => setSize(e.target.value)}>
-                  {product.size?.map((i) => (
-                    <FilterSizeOption key={i}> {i}</FilterSizeOption>
-                  ))}
-                </FilterSize>
-              </Filter>
-            </FilterContainer>
-            <AddContainer>
-              <QuantityContainer>
-                <Remove onClick={() => handleQuantity("decrease")} />
-                <Quantity>{quantity}</Quantity>
-                <Add onClick={() => handleQuantity("increase")} />
-              </QuantityContainer>
-              <Button onClick={handleClick}> Add to Cart</Button>
-            </AddContainer>
-          </InfoContainer>
-        </Wrapper>
-        <DetailsContainer>
-          <Left>
-            <Description>
-              <Title>Description</Title>
-              <p>{product.description}</p>
-              <p>Key Features:</p>
-              <li> Extra coverage at front </li>
-              <li> Eye catching cross back detail</li>
-              <li> Made of 90% organic cotton 10% Spandex</li>
-            </Description>
-          </Left>
-          <Center>
-            <Description>
-              <Title>Size & Fit </Title>
-              Fit: <li>Relaxed - Oversized with room all around</li>
-              <li> Slit Back </li>
-              <p></p>
-              Model wears:
-              <li>Size S</li>
-              Model's height:
-              <li>172 cm</li>
-              Fabric:
-              <li>94% Cotton, 6% Spandex</li>
-            </Description>
-          </Center>
-          <Right>
-            <Description>
-              <Title>Material</Title>
-              <li> Breathable cotton seamless</li>
-              <li> Light, everyday support for studio & street </li>
-              <li>4-Way stretch for a move-with-you feel</li>
-              <li>Moisture-wicking</li>
-              <li>
-                Machine wash cold on gentle cycle, inside out. with like colors.
-              </li>
-              <li> Tumble dry low; low iron. Do not dry clean.</li>
-            </Description>
-          </Right>
-        </DetailsContainer>
-        <Newsletter />
-        <Footer />
-      </Container>
-    </div>
+              </FilterSize>
+            </Filter>
+          </FilterContainer>
+          <AddContainer>
+            <QuantityContainer>
+              <Remove onClick={() => handleQuantity("dec")} />
+              <Quantity>{quantity}</Quantity>
+              <Add onClick={() => handleQuantity("inc")} />
+            </QuantityContainer>
+            <Button onClick={handleClick}>ADD TO CART</Button>
+          </AddContainer>
+        </InfoContainer>
+      </Wrapper>
+      <Newsletter />
+      <Footer />
+    </Container>
   );
 };
 

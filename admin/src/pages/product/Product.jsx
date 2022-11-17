@@ -1,16 +1,17 @@
-import { Link, useLocation } from "react-router-dom";
 import "./product.css";
 import Chart from "../../components/chart/Chart";
-import { productData } from "../../dummyData";
 import { Publish } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
+import { Link, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateProduct } from "../../redux/apiCalls";
 
 export default function Product() {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
-  const [productStats, setproductStats] = useState([]);
+  const [productStats, setProductStats] = useState([]);
 
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
@@ -43,15 +44,33 @@ export default function Product() {
         const list = response.data.sort((a, b) => {
           return a._id - b._id;
         });
-        response.data.map((item) =>
-          setproductStats((prev) => [
+        list.map((item) =>
+          setProductStats((prev) => [
             ...prev,
             { name: MONTHS[item._id - 1], Sales: item.total },
           ])
         );
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     };
-  });
+    getStats();
+  }, [productId, MONTHS]);
+
+  const [inputs, setInputs] = useState({});
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+  const dispatch = useDispatch();
+  // console.log(inputs);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    updateProduct(productId, product, dispatch);
+  };
+
   return (
     <div className="product">
       <div className="productTitleContainer">
@@ -70,20 +89,16 @@ export default function Product() {
         </div>
         <div className="productTopRight">
           <div className="productInfoTop">
-            <img src={product.image} alt="" className="productInfoImg" />
             <span className="productName">{product.title}</span>
           </div>
           <div className="productInfoBottom">
             <div className="productInfoItem">
-              <span className="productInfoKey">id:</span>
+              <span className="productInfoKey">ProductId:</span>
               <span className="productInfoValue">{product._id}</span>
             </div>
+
             <div className="productInfoItem">
-              <span className="productInfoKey">sales:</span>
-              <span className="productInfoValue">5123</span>
-            </div>
-            <div className="productInfoItem">
-              <span className="productInfoKey">in stock:</span>
+              <span className="productInfoKey">Inventory: </span>
               <span className="productInfoValue">{product.inventory}</span>
             </div>
           </div>
@@ -93,13 +108,28 @@ export default function Product() {
         <form className="productForm">
           <div className="productFormLeft">
             <label>Product Name</label>
-            <input type="text" placeholder={product.title} />
+            <input
+              name="title"
+              type="text"
+              placeholder={product.title}
+              onChange={handleChange}
+            />
             <label>Product Description</label>
-            <input type="text" placeholder={product.description} />
+            <input
+              name="description"
+              type="text"
+              placeholder={product.description}
+              onChange={handleChange}
+            />
             <label>Price</label>
-            <input type="text" placeholder={product.price} />
-            <label>In Stock</label>
-            <select name="inStock" id="idStock">
+            <input
+              name="price"
+              type="text"
+              placeholder={product.price}
+              onChange={handleChange}
+            />
+            <label>Inventory</label>
+            <select name="inventory" id="inventory" onChange={handleChange}>
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
@@ -112,7 +142,9 @@ export default function Product() {
               </label>
               <input type="file" id="file" style={{ display: "none" }} />
             </div>
-            <button className="productButton">Update</button>
+            <button onClick={handleClick} className="productButton">
+              Update
+            </button>
           </div>
         </form>
       </div>

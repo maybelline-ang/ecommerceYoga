@@ -9,9 +9,16 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
+const Title = styled.div`
+  padding: 20px;
+  font-size: 40px;
+  font-weight: 900;
+`;
+
 const Categories = () => {
   return (
     <div>
+      <Title> Our Products </Title>
       <Container>
         {categories.map((item) => (
           <CategoriesItem item={item} key={item.id} />

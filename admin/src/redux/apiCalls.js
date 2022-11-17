@@ -1,5 +1,5 @@
 import { loginFailure, loginStart, loginSuccess } from "./userRedux";
-import { publicRequest } from "../requestMethods";
+import { publicRequest, userRequest } from "../requestMethods";
 import {
   getProductSuccess,
   getProductFailure,
@@ -7,8 +7,15 @@ import {
   deleteProductInitial,
   deleteProductSuccess,
   deleteProductFailure,
+  updateProductInitial,
+  updateProductSuccess,
+  updateProductFailure,
+  createProductInitial,
+  createProductSuccess,
+  createProductFailure,
 } from "./productRedux";
 
+//////////// LOGIN ////////////////////////////
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
   try {
@@ -19,6 +26,7 @@ export const login = async (dispatch, user) => {
   }
 };
 
+//////////////// GET /////////////////////////
 export const getProducts = async (dispatch) => {
   dispatch(getProductInitial());
   try {
@@ -29,12 +37,36 @@ export const getProducts = async (dispatch) => {
   }
 };
 
+/////////////////// DELETE /////////////////////////////
 export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductInitial());
   try {
+    // ** commenting out during demo so that it wouldnt be deleted from dB ** //
     // const response = await userRequest.delete(`/products/${id}`);
     dispatch(deleteProductSuccess(id));
   } catch (error) {
     dispatch(deleteProductFailure());
+  }
+};
+
+///////////////////// UPDATE //////////////////////////
+export const updateProduct = async (id, product, dispatch) => {
+  dispatch(updateProductInitial());
+  try {
+    const response = await userRequest.put(`/products/${id}`);
+    dispatch(updateProductSuccess({ id: id, product: product }));
+  } catch (error) {
+    dispatch(updateProductFailure());
+  }
+};
+
+/////////////////// CREATE /////////////////////////////
+export const createProduct = async (product, dispatch) => {
+  dispatch(createProductInitial());
+  try {
+    const response = await userRequest.post(`/products`, product);
+    dispatch(createProductSuccess(response.data));
+  } catch (error) {
+    dispatch(createProductFailure());
   }
 };
