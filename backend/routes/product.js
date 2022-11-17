@@ -21,14 +21,12 @@ router.post("/", verifyTokenAndAdmin, async (req, res) => {
 //UPDATE
 ///////////////////////////////////////////
 router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+  console.log(req.body);
+
   try {
-    const updatedProduct = await Product.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body,
-      },
-      { new: true }
-    );
+    const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {
+      $set: req.body,
+    });
     res.status(200).json(updatedProduct);
   } catch (err) {
     res.status(500).json(err);

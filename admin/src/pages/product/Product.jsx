@@ -68,7 +68,7 @@ export default function Product() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    updateProduct(productId, product, dispatch);
+    updateProduct(productId, inputs, dispatch);
   };
 
   return (
