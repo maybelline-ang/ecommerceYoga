@@ -14,11 +14,11 @@ Admin Dashboard: An admin dashboard allowing admin to perform CRUD operations on
 
 ### Installing
 * To run this program
- ** $ cd admin 
- ** $ cd frontend
- ** $ cd backend 
- ** $ npm install
- ** $ npm start
+ * $ cd admin 
+ * $ cd frontend
+ * $ cd backend 
+ * $ npm install
+ * $ npm start
 
 
 ### Inspiration
